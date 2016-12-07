@@ -1,6 +1,6 @@
 import java.util.*;
 public class KiunisalaMP5 {
-  public static int THREAD_COUNT = 10;
+  public static int threadCount = 10;
   public static int charPerThread;
   private static Scanner sc;
   
@@ -22,18 +22,18 @@ public class KiunisalaMP5 {
     init = String.valueOf(cell);
     System.out.println(init);
     
-    if(x < THREAD_COUNT){ //if size given is less than 10
-        THREAD_COUNT = x;
+    if(x < threadCount){ //if size given is less than 10
+    	threadCount = x;
     }
     
-    Rule30Thread[] workers = new Rule30Thread[THREAD_COUNT];
-    charPerThread = x / THREAD_COUNT;
+    Rule30Thread[] workers = new Rule30Thread[threadCount];
+    charPerThread = x / threadCount;
     max = charPerThread - 1;
     
     for(int i = 0; i < x - 1; i++){
         
-    	for(int j = 0; j < THREAD_COUNT; j++){
-    		if(j == THREAD_COUNT - 1){
+    	for(int j = 0; j < threadCount; j++){
+    		if(j == threadCount - 1){
                 max = x - 1;
             }       
             workers[j] = new Rule30Thread(min, max, init);
@@ -41,11 +41,11 @@ public class KiunisalaMP5 {
             max = min + charPerThread - 1;
         }
         
-        for(int j = 0; j < THREAD_COUNT; j++){
+        for(int j = 0; j < threadCount; j++){
             workers[j].start();
         }
         
-        for (int j = 0; j < THREAD_COUNT; j++) {
+        for (int j = 0; j < threadCount; j++) {
         	while (workers[j].isAlive()) {
         	try {
         		workers[j].join();
@@ -55,7 +55,7 @@ public class KiunisalaMP5 {
         	}
         }
                 
-        for(int j = 0; j < THREAD_COUNT; j++){
+        for(int j = 0; j < threadCount; j++){
             nxt += workers[j].getRes();
         }
         
