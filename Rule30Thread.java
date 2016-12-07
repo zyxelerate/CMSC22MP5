@@ -1,6 +1,6 @@
 public class Rule30Thread extends Thread{
 
-    private static String in;
+    private String in;
     private int min;
     private int max;
     private String result = "";
@@ -21,7 +21,7 @@ public class Rule30Thread extends Thread{
         }
     }
     
-    public static char R30T(int x){
+    public char R30T(int x){
         char res = '0';
         
         if (x == 0){
